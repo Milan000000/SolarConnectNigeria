@@ -1,0 +1,30 @@
+@import "tailwindcss";
+
+@theme {
+  --color-solar-primary: #f59e0b; /* Amber 500 */
+  --color-solar-secondary: #1e3a8a; /* Blue 900 */
+  --color-solar-accent: #fbbf24; /* Amber 400 */
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  body {
+    @apply bg-slate-50 text-slate-900;
+  }
+}
+
+.glass-card {
+  @apply bg-white/80 backdrop-blur-md border border-white/20 shadow-xl rounded-2xl;
+}
+
+.btn-primary {
+  @apply bg-solar-primary hover:bg-solar-accent text-white px-6 py-3 rounded-xl font-semibold transition-all duration-200 shadow-lg hover:shadow-xl active:scale-95;
+}
+
+.btn-secondary {
+  @apply bg-solar-secondary hover:bg-blue-800 text-white px-6 py-3 rounded-xl font-semibold transition-all duration-200 shadow-lg hover:shadow-xl active:scale-95;
+}
+
+.input-field {
+  @apply w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-solar-primary focus:ring-2 focus:ring-solar-primary/20 outline-none transition-all;
+}
