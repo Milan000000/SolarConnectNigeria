@@ -45,7 +45,10 @@ export default function QuoteRequest() {
 });
 
 const data = await res.json();
-        throw new Error(data.error || 'Submission failed');
+
+if (!res.ok) {
+  throw new Error(data.message || 'Submission failed');
+}
       }
 
       // Generate WhatsApp message
