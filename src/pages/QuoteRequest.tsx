@@ -36,17 +36,15 @@ export default function QuoteRequest() {
     setError('');
 
     try {
-      const response = await fetch('/api/leads', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          ...formData,
-          assignedInstallerId: assignedInstaller?.id
-        })
-      });
+     const res = await fetch('/api/submit', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify(formData),
+});
 
-      if (!response.ok) {
-        const data = await response.json();
+const data = await res.json();
         throw new Error(data.error || 'Submission failed');
       }
 
