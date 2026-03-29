@@ -4,6 +4,12 @@ const handleSubmit = async (e: React.FormEvent) => {
   setError('');
 
   try {
+   const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  setLoading(true);
+  setError('');
+
+  try {
     const res = await fetch('/api/submit', {
       method: 'POST',
       headers: {
@@ -12,7 +18,29 @@ const handleSubmit = async (e: React.FormEvent) => {
       body: JSON.stringify(formData),
     });
 
-    const data = await res.json();
+    let data;
+
+    try {
+      data = await res.json();
+    } catch (err) {
+      const text = await res.text();
+      console.error("⚠️ Not JSON response:", text);
+      throw new Error("Server returned invalid response");
+    }
+
+    if (!res.ok) {
+      throw new Error(data.message || "Something went wrong");
+    }
+
+    console.log("✅ Success:", data);
+
+  } catch (error: any) {
+    console.error("❌ Error:", error.message);
+    setError(error.message);
+  } finally {
+    setLoading(false);
+  }
+};
 
     if (!res.ok) {
       throw new Error(data.message || 'Submission failed');
